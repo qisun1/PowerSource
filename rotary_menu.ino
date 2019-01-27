@@ -1,11 +1,28 @@
-#include <Wire.h>
-#include <Encoder.h>
-#include <LiquidCrystal_I2C.h>
+#include <Wire.h>  // required for LiquidCrystal_I2C
+#include <Encoder.h>  // * Paul Stoffregen https://github.com/PaulStoffregen/Encoder
+#include <LiquidCrystal_I2C.h>  // * John Rickman https://github.com/johnrickman/LiquidCrystal_I2C
+#include <FastX9CXXX.h> // * GitMoDu https://github.com/GitMoDu/FastX9CXXX
+#include <Fast.h> //* GitMoDu https://github.com/GitMoDu/Fast
 
-
-#define rotaryPin1 3
+// pins for rotary encoder
+#define rotaryPin1 3 
 #define rotaryPin2 2
 #define buttonPin 4
+
+//pins for digital pot x9c103 (10k) for LM317T voltage regulator
+#define X9_CS_PIN_DC 5
+#define X9_UD_PIN_DC 6
+#define X9_INC_PIN_DC 7
+
+//pins for digital pot x9c103 (10k) for op amp to control AC amplitude
+#define X9_CS_PIN_AC 8
+#define X9_UD_PIN_AC 9
+#define X9_INC_PIN_AC 10
+
+//pins for LiquidCrystal_I2C display
+// SDA -> A4
+// SCL -> A5
+
  // Change these two numbers to the pins connected to your encoder.
  //   Best Performance: both pins have interrupt capability
  //   Good Performance: only the first pin has interrupt capability
@@ -26,6 +43,10 @@ float amplitude;
 float DCVoltage;
 
 
+
+FastX9CXXX PotDCVoltage;
+FastX9CXXX PotACAmp;
+
 void setup() {
 	Serial.begin(9600);
 	Serial.println("start:");
@@ -38,11 +59,15 @@ void setup() {
 
 	menu1CursorPos = 0;
 	DCVoltage = 5;
+	PotDCVoltage.Setup(X9_CS_PIN_DC, X9_UD_PIN_DC, X9_INC_PIN_DC);
+	PotDCVoltage.JumpToStep(50);
 
 	menu3CursorPos = 0;
 	acSignal = "OFF";
 	waveForm = "SINE";
 	amplitude = 1.0;
+	PotACAmp.Setup(X9_CS_PIN_AC, X9_UD_PIN_AC, X9_INC_PIN_AC);
+	PotDCVoltage.JumpToStep(50);
 
 	printMenu();
 	myEnc.write(0);
