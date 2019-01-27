@@ -44,8 +44,8 @@ float DCVoltage;
 
 
 
-FastX9CXXX PotDCVoltage;
-FastX9CXXX PotACAmp;
+FastX9C103 PotDCVoltage;
+FastX9C103 PotACAmp;
 
 void setup() {
 	Serial.begin(9600);
