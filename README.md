@@ -1,5 +1,11 @@
 # Power Source
 In progress
+Arduino NANO
+EC11 rotary encoder control all operations
+LCD 20x4 for display
+LM317 + X9c103 for DC source
+AD9833 (signal generator) + LM358 (amplitude control)
+ADC on NANO as multi-channel voltage meter
 
 ## Examples
 
