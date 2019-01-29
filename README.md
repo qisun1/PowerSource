@@ -16,7 +16,7 @@ ADC on NANO as multi-channel voltage meter
 Arduino nano
 EC11 rotary encoder
 LCD display
-LM317 voltage regulator
+LM385+2N2222 for voltage regulator (LM317 voltage regulator not working, as EC11 voltage cannot go above 5v)
 X9c103 digital pot
 AD9833 programmable signal generator
 
