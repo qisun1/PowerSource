@@ -1,5 +1,5 @@
 # Power Source
-In progress
+Project Abolished 
 Arduino NANO
 EC11 rotary encoder control all operations
 LCD 20x4 for display
